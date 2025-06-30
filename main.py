@@ -5,6 +5,7 @@ from os import listdir, system
 import configparser
 from textual.app import App, ComposeResult
 from textual.widgets import Tree, Log
+import shutil
 
 #menu_file = '/etc/xdg/menus/applications-merged/kali-applications.menu'
 #tree = ET.parse(menu_file)
@@ -44,7 +45,8 @@ class TreeApp(App):
                     dirname = entity.text.removesuffix('.directory')        # If we find a directory
                     if packages.get(dirname):                               #  that we saw as a tool category
                         for tool in packages[dirname]:                      #  for each tool in the category
-                            menu = branch.add_leaf(tool['name'], data=tool) #  add it to the tree
+                            if shutil.which(tool['name']):                  #  if it exists on the system
+                                menu = branch.add_leaf(tool['name'], data=tool) #  add it to the tree
         walk_xml(tree.root, xml_root)
         yield tree
 
