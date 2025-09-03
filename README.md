@@ -1,4 +1,4 @@
-# kaliapps
+# tui-app-menu-py
 Quck-and-dirty utility for navigating the Kali tools menu from the terminal
 * Shows tool description on highlight
 * Creates tmux session on selection
